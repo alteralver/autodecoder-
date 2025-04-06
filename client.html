@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>加密POST请求</title>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+</head>
+<body>
+ <h1>发送加密POST请求</h1>
+ <input type="text" id="dataInput" placeholder="输入要发送的数据" />
+ <button onclick="sendEncryptedRequest()">发送加密请求</button>
+ <div id="response"></div>
+ <script>
+ const secretKey = 'your-secret-key'; // 应该与服务器端使用的密钥相同
+
+ function encrypt(data, key) {
+     return CryptoJS.AES.encrypt(data, key).toString();
+ }
+
+ function decrypt(encryptedData, key) {
+     const bytes = CryptoJS.AES.decrypt(encryptedData, key);
+     return bytes.toString(CryptoJS.enc.Utf8);
+ }
+
+ function sendEncryptedRequest() {
+     const data = document.getElementById('dataInput').value;
+     const encryptedData = encrypt(data, secretKey);
+
+     fetch('http://172.21.144.1:3001/encrypted-data', {
+         method: 'POST',
+         headers: {
+             'Content-Type': 'text/plain'
+         },
+         body: encryptedData
+     })
+     .then(response => response.text())
+     .then(encryptedResponse => {
+         const decryptedResponse = decrypt(encryptedResponse, secretKey);
+         document.getElementById('response').innerText = '服务器响应：' + decryptedResponse;
+     })
+     .catch(error => {
+         console.error('Error:', error);
+     });
+ }
+ </script>
+</body>
+</html>
