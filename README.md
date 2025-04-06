@@ -1,3 +1,6 @@
+项目插件来源于f0ng佬的autodecoder插件：
+https://github.com/f0ng/autoDecoder/releases
+
 由于作者在测试前端加解密案例的时候，可能因为扰动因素过多而导致没法理解autodecoder真正的操作流程，所以自己写了个简单的前后端加密，用来测试autodecoder的工作流程。
 
  案例是自己写的，使用了简单的AES加密，基本结构如下
