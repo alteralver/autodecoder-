@@ -16,11 +16,12 @@ autodecoder配置
 ![image (1)](https://github.com/user-attachments/assets/192056b7-4790-4259-8345-663f270b26b9)
 
 问题1：关于二次加密
-经过测试，应该是会根据代码执行情况，优先选择encode，所以在后端代码来的时候，调用了接口对代码进行了加密。
+经过测试，仅针对这个案例如果不加过滤，前端向后端发包的时候每次都会encode一遍。
+解决办法，添加过滤关键字
 
 ![image (2)](https://github.com/user-attachments/assets/eeb4e0a5-d093-4d2f-b3ee-76419bc690c2)
 
-问题设想，也可能会出现多次解密。。所以需要通过关键词的方式来过滤，防止二次加密的产生。
+所以需要通过关键词的方式来过滤，防止二次加密的产生。
 
 ![image (3)](https://github.com/user-attachments/assets/2bd72df9-6a3c-455f-b43d-f44b79409f81)
 
